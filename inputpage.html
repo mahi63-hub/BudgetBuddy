@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script src="ip1.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Budget Buddy - Input Page</title>
+    <style>
+      :root {
+        /* --bg: #f8f5fc; */
+        --card-bg: #ffffff;
+        --primary: #8f94fb;
+        --accent: #8f94fb;
+        --text-dark: #040404;
+        --border: #8f94fb;
+        --hover: #8f94fb;
+        --shadow: rgba(147, 51, 234, 0.1);
+
+        background: linear-gradient(
+          90deg,
+          #d4d9ff 0%,
+          #e5cef0 50%,
+          #dbdff2 100%
+        );
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg);
+        color: var(--text-dark);
+        line-height: 1.6;
+      }
+
+      header {
+        background-color: var(--card-bg);
+        padding: 1rem 2rem;
+        text-align: center;
+        color: white;
+        font-size: 1.75rem;
+        font-weight: bold;
+        letter-spacing: 0.5px;
+        box-shadow: 0 2px 8px var(--shadow);
+      }
+
+      main {
+        padding: 2rem 1rem;
+        max-width: 900px;
+        margin: 0 auto;
+      }
+
+      .card {
+        background-color: rgba(255, 255, 255, 0.4);
+        padding: 2rem;
+        border-radius: 16px;
+        /* border: 1px solid var(--border); */
+        box-shadow: 0 6px 20px var(--shadow);
+        margin-bottom: 2.5rem;
+        margin-top: 2.5rem;
+        backface-visibility: hidden;
+      }
+
+      button {
+        /*background-color: #4caf50;  Green */
+        /* color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px; */
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        background-color: #8f94fb;
+      }
+
+      button:hover {
+        background-color: #b8bbf1; /* Darker green on hover */
+        transform: scale(1.05); /* Slight zoom on hover */
+      }
+
+      h2 {
+        margin-bottom: 1rem;
+        color: var(--primary);
+        font-size: 1.4rem;
+        /* border-bottom: 2px solid var(--primary); */
+        padding-bottom: 4px;
+      }
+
+      label {
+        display: block;
+        margin-top: 1rem;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        font-size: 1rem;
+        background-color: #f9fafb;
+        margin-top: 4px;
+        transition: border 0.2s ease-in-out;
+      }
+
+      input:focus,
+      select:focus {
+        outline: none;
+        border-color: var(--accent);
+        background-color: #fff;
+      }
+
+      .expense-group {
+        display: flex;
+        gap: 0.75rem;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+
+      .expense-group select,
+      .expense-group input {
+        flex: 1;
+        min-width: 120px;
+      }
+
+      .remove-btn,
+      .save-btn,
+      .add-btn,
+      .submit-btn,
+      .save-btn-main,
+      button {
+        background-color: var(--accent);
+        color: white;
+        border: none;
+        padding: 0.55rem 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: background-color 0.2s ease;
+      }
+
+      .submit-btn {
+        margin-top: 1.5rem;
+        font-weight: bold;
+        font-size: 1rem;
+      }
+
+      .save-btn-main {
+        background-color: var(--primary);
+        margin-left: 1rem;
+        font-weight: 600;
+        margin-top: 1rem;
+      }
+
+      .remove-btn {
+        background-color: #e11d48;
+        font-weight: bold;
+        margin-top: 0.6rem;
+        margin-left: 0.3rem;
+        padding: 0.5rem 0.75rem;
+      }
+
+      .add-btn {
+        margin-top: 1rem;
+        font-size: 0.9rem;
+        background-color: var(--accent);
+      }
+
+      .addIncome,
+      .addSavings {
+        margin-top: 1rem;
+      }
+
+      .submit-btn:hover,
+      .save-btn-main:hover,
+      .remove-btn:hover,
+      .save-btn:hover {
+        background-color: #b8bbf1; /* Darker green on hover */
+        transform: scale(1.05); /* Slight zoom on hover */
+      
+      }
+
+      .remove-btn:hover {
+        background-color: black;
+      }
+      footer {
+        text-align: center;
+        padding: 1rem;
+        background: var(--primary);
+        color: white;
+        font-size: 0.9rem;
+        margin-top: 2rem;
+      }
+
+      #reminder-date,
+      #reminder-purpose {
+        margin-top: 4px;
+      }
+
+      div[style*="border: 2px solid #ccc;"] {
+        background-color: #ffffff;
+        border: 1px solid var(--border) !important;
+        box-shadow: 0 4px 12px var(--shadow);
+        padding: 2rem !important;
+        border-radius: 16px !important;
+      }
+
+      button[onclick*="saveReminder"] {
+        background-color: var(--primary);
+        font-weight: 600;
+        padding: 0.6rem 1.2rem;
+        border-radius: 8px;
+        margin-top: 0.5rem;
+      }
+
+      @media (max-width: 600px) {
+        .expense-group {
+          flex-direction: column;
+        }
+
+        .save-btn-main,
+        .submit-btn,
+        .add-btn,
+        button[onclick*="saveReminder"] {
+          width: 100%;
+          margin-top: 1rem;
+        }
+      }
+
+      nav {
+        background: white;
+        box-shadow: rgba(0, 0, 0, 0.05) 0 0 10px 0;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-radius: 9999px;
+        max-width: 1080px;
+        margin: 1rem auto;
+        padding: 0 1.5rem;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      nav .logo {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        max-height: 56px;
+      }
+
+      .logo-img {
+        height: 40px; /* Controls logo size */
+        max-width: 120px; /* Prevents overly wide logos */
+        object-fit: contain; /* Maintains aspect ratio */
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        align-items: center;
+        gap: 1.5rem;
+        font-weight: 500;
+        font-size: 0.9rem;
+      }
+
+      nav ul li {
+        position: relative;
+      }
+
+      nav ul li a {
+        color: black;
+        text-decoration: none;
+        padding: 0.4rem 0.25rem;
+        border-radius: 0.35rem;
+        transition: background-color 0.3s ease;
+      }
+
+      nav ul li a:hover,
+      nav ul li a.active {
+        background: #f6f6ff;
+        color: #4c4cff;
+      }
+
+      nav ul li .dropdown {
+        cursor: pointer;
+      }
+
+      nav ul li .dropdown-content {
+        position: absolute;
+        top: 110%;
+        left: 0;
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+        padding: 0.5rem 0;
+        min-width: 140px;
+        display: none;
+        flex-direction: column;
+        z-index: 20;
+      }
+
+      nav ul li:hover .dropdown-content {
+        display: flex;
+      }
+
+      nav ul li .dropdown-content a {
+        padding: 0.5rem 1rem;
+        font-weight: 400;
+        color: #333;
+      }
+
+      nav ul li .dropdown-content a:hover {
+        background: #e4e4ff;
+        color: #4c4cff;
+      }
+
+      /* Login / Signup buttons grouping */
+      .auth-buttons {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .btn-login {
+        font-weight: 600;
+        color: black;
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <header> Budget Buddy - Input Page</header> -->
+
+    <nav>
+      <a href="#" class="logo">
+        <img
+          src="Screenshot_2025-07-22_211511-removebg-preview.png"
+          class="logo-img"
+        />
+      </a>
+      <ul>
+        <li><a href="#" class="active">Home</a></li>
+        <li>
+          <span class="dropdown">Features &#x25be;</span>
+          <div class="dropdown-content">
+            <a href="#">Feature 1</a>
+            <a href="#">Feature 2</a>
+            <a href="#">Feature 3</a>
+          </div>
+        </li>
+        <li>
+          <span class="dropdown">Solutions &#x25be;</span>
+          <div class="dropdown-content">
+            <a href="#">Solution 1</a>
+            <a href="#">Solution 2</a>
+          </div>
+        </li>
+        <li><a href="#">Enterprise</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <a href="#" class="btn-login">Log in</a>
+        <a href="#" class="btn-primary">Sign Up</a>
+      </div>
+    </nav>
+
+    <main>
+      <div class="card">
+        <h2>Enter Income & Savings Goal</h2>
+        <label for="income">Monthly Income (₹)</label>
+        <input type="number" id="income" placeholder="e.g., 40000" required />
+
+        <label for="savings">Savings Goal (₹)</label>
+        <input type="number" id="savings" placeholder="e.g., 10000" required />
+
+        <div class="income-actions">
+          <button class="addIncome" onclick="addIncomeAmount()">
+            Add Income
+          </button>
+          <button class="addSavings" onclick="addSavingsAmount()">
+            Add Savings
+          </button>
+        </div>
+        <div class="income-actions">
+          <button class="save-btn-main" onclick="resetFixedBudget()">
+            Reset
+          </button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Expenses</h2>
+        <div id="expense-list">
+          <div class="expense-group">
+            <select class="main-category" onchange="updateSubcategories(this)">
+              <option value="">-- Select Category --</option>
+              <option value="Housing">🏠 Housing</option>
+              <option value="Utilities">⚡ Utilities</option>
+              <option value="Food">🍲 Food & Groceries</option>
+              <option value="Transport">🚗 Transportation</option>
+              <option value="Entertainment">🎉 Entertainment</option>
+              <option value="Health">🏥 Health</option>
+              <option value="Education">📚 Education</option>
+              <option value="EMI">💳 EMI</option>
+              <option value="Other">➕ Other</option>
+            </select>
+
+            <select class="sub-category">
+              <option value="">-- Select Subcategory --</option>
+            </select>
+
+            <input type="number" placeholder="Amount (₹)" />
+            <button class="remove-btn" onclick="removeExpense(this)">
+              &times;
+            </button>
+          </div>
+        </div>
+        <button class="add-btn" onclick="addExpense()">+ Add More</button>
+      </div>
+
+      <div class="card">
+        <h2>Set Reminder</h2>
+        <label for="reminder-date">Reminder Date:</label>
+        <input type="date" id="reminder-date" required /><br /><br />
+
+        <label for="reminder-purpose">Purpose:</label>
+        <input
+          type="text"
+          id="reminder-purpose"
+          placeholder="e.g., Pay Rent, Bill Due"
+          required
+        /><br /><br />
+
+        <button onclick="saveReminder()">Set Reminder</button>
+      </div>
+
+      <div class="card">
+        <h2>Saved Records</h2>
+        <table
+          id="records-table"
+          style="width: 100%; border-collapse: collapse"
+        >
+          <thead>
+            <tr style="background-color: #f1f5f9">
+              <th style="border: 1px solid #d1d5db; padding: 0.5rem">Date</th>
+              <th style="border: 1px solid #d1d5db; padding: 0.5rem">Income</th>
+              <th style="border: 1px solid #d1d5db; padding: 0.5rem">
+                Savings
+              </th>
+              <th style="border: 1px solid #d1d5db; padding: 0.5rem">
+                Expenses
+              </th>
+              <th style="border: 1px solid #d1d5db; padding: 0.5rem">
+                Balance
+              </th>
+            </tr>
+          </thead>
+          <tbody id="records-body">
+            <!-- Rows will be inserted here -->
+          </tbody>
+        </table>
+        <!-- <div id="totals" style="margin-top: 1.5rem; padding: 1rem; border: 1px solid #ccc; border-radius: 8px; background: #f9fafb;"></div> -->
+      </div>
+
+      <center>
+        <button class="submit-btn" onclick="submitData()">Submit</button>
+        <button class="save-btn-main" onclick="saveToStorage()">Save</button>
+      </center>
+    </main>
+
+    <footer>© 2025 Budget Buddy</footer>
+  </body>
+</html>
